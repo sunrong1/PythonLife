@@ -25,7 +25,12 @@ trusted-host = pypi.douban.com
 ## 常用快捷键
 好的键盘，加自己熟悉的一套快捷配置和IDE自有的快捷特性，构成自己顺畅的编程环境。
 
+## 调试
+- scientifc mode，view中，可以快速启动调试
 ## 插件
+
+- save action 保存后，进行格式优化，import优化等操作；和Intellij类似
+- autopep8,pip安装，pycharm配置的格式化工具
 
 
 
