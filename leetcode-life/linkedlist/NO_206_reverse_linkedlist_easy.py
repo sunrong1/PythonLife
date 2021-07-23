@@ -12,14 +12,14 @@ class Solution:
         """
         if not head:
             return head
-        result = None
-        tmp = head
-        while tmp:
-            tmp2 = tmp.next
-            tmp.next = result
-            result = tmp
-            tmp = tmp2
-        return result
+        curr = None  # 注意结束标识，否则会出现循环链表
+        nx = head
+        while nx:
+            temp = nx.next
+            nx.next = curr
+            curr = nx
+            nx = temp
+        return curr
 
 
 a = ListNode(1)
