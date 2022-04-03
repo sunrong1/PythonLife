@@ -40,14 +40,47 @@ def quicksort_v1(arr, low, high):
     :return:
     """
     if low < high:
-        p = partition(arr, low, high)
+        p = quickSort_my(arr, low, high)
         print("p:", p)
         quicksort_v1(arr, low, p - 1)
         quicksort_v1(arr, p + 1, high)
 
 
+def quickSort_my(arr):
+    """
+    快速排序，
+    1. 首先记得是利用基准值进行判断的
+    2. 记得是递归过程,分治的思想
+    :param arr:
+    :return:
+    """
+    quickSort_my_recursion(arr, 0, len(arr))
+
+
+def quickSort_my_recursion(arr, left, right):
+    if left < right:
+        p = partition(arr, left, right)
+        quickSort_my_recursion(arr, left, p - 1)
+        quickSort_my_recursion(arr, p + 1, right)
+
+
+def partition_my(arr, left, right):
+    p = arr[left]
+    l = left
+    r = right
+    while l < r:
+        while arr[l] <= p and l < r:
+            l += 1
+        while arr[r] > p and l < r:
+            r -= 1
+        if l < r:
+            arr[l], arr[r] = arr[r], arr[l]
+    arr[l] = p
+    return l
+
+
 arr = [2, 3, 1, 7, 1]
 # > 1 1 7 3
 # >
-quicksort_v1(arr, 0, len(arr) - 1)
+quickSort_my_recursion(arr, 0, len(arr) - 1)
 print(arr)

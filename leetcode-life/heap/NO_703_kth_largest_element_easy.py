@@ -1,6 +1,11 @@
 import heapq
 from typing import List
 
+"""
+第K个最大的元素
+建立一个小顶堆，只保留K个数，堆顶就是第K大的数
+"""
+
 
 class Solution:
 
