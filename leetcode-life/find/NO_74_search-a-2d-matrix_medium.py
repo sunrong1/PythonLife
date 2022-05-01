@@ -34,5 +34,15 @@ def searchMatrix(matrix: List[List[int]], target: int) -> bool:
     return False
 
 
+"""
+第二次编写
+
+"""
+
+
+def searchMatrix2(matrix: List[List[int]], target: int) -> bool:
+    pass
+
+
 matrix = [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]]
 print(searchMatrix(matrix, 3))

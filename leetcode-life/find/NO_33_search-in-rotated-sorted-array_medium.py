@@ -107,7 +107,7 @@ mid ==target
 """
 
 
-def search2(nums: List[int], target: int) -> int:
+def search1_1(nums: List[int], target: int) -> int:
     if not nums:
         return -1
     start = 0
@@ -118,7 +118,7 @@ def search2(nums: List[int], target: int) -> int:
         if target < nums[mid]:
             # target不在左升序序列，只可能再右升序列中
             if target < nums[start]:
-                
+
                 start = mid + 1
             # target在左升序中
             elif target > nums[start]:
@@ -148,8 +148,76 @@ def search2(nums: List[int], target: int) -> int:
     # nums = [4, 5, 6, 7, 8, 1, 2, 3]
 
 
+"""
+第二次编写
+思路更清晰
+先思路阶梯模板，然后再填充特例，效率更高；
+根据阶梯图，mid的位置进行判断
+mid 的两边总有一个是有序的
+mid左边有序，mid右边有序
+
+"""
+
+
+def search2(nums: List[int], target: int) -> int:
+    length = len(nums)
+    if length < 1:
+        return -1
+    l = 0
+    r = length - 1
+
+    while l <= r:
+        mid = (l + r) // 2
+        # target 较小
+        if nums[mid] > target:
+            # 左半部分有序
+            if nums[mid] > nums[l]:
+                # 在左半部分
+                if nums[l] < target:
+                    if nums[r] == target:
+                        return r
+                    r = mid - 1
+                # 在右半部分
+                elif nums[l] > target:
+                    l = mid + 1
+                else:
+                    return l
+            # 右半部分有序
+            else:
+                # 右半部分有序，target肯定在左边
+                if nums[r] == target:
+                    return r
+                r = mid - 1
+        # target值较大
+        elif nums[mid] < target:
+            # 左边有序，肯定在右边
+            if nums[mid] > nums[l]:
+                if nums[l] == target:
+                    return l
+                l = mid + 1
+            # 右边有序
+            else:
+                # 在右半部分
+                if nums[r] > target:
+                    if nums[l] == target:
+                        return l
+                    l = mid + 1
+                # 在左半不符
+                elif nums[r] < target:
+                    r = mid - 1
+                else:
+                    return r
+        else:
+            return mid
+    return -1
+
+
 nums = [5, 1, 2, 3, 4]
 # nums = [1, 2, 3]
 # nums = [6, 7, 8, 1, 2, 3, 4, 5]
-# nums =[]
-print(search2(nums, 1))
+# nums = [4, 5, 6, 7, 0, 1, 2]
+nums = [1]
+nums = [5, 1, 3]
+
+# nums = [8, 1, 2, 3, 4, 5, 6, 7]
+print(search2(nums, 5))

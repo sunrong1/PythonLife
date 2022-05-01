@@ -44,5 +44,37 @@ def searchRange(nums: List[int], target: int) -> List[int]:
     return [start + 1, end - 1]
 
 
+"""
+第二次书写：
+简化了代码；变量书写更随意些，效率更高；
+"""
+
+
+def searchRange2(nums: List[int], target: int) -> List[int]:
+    length = len(nums)
+    if length < 1 or target < nums[0] or target > nums[-1]:
+        return [-1, -1]
+    l = 0
+    r = length - 1
+    mid = (l + r) // 2
+    while l < r:
+        if nums[mid] > target:
+            r = mid - 1
+        elif nums[mid] < target:
+            l = mid + 1
+        else:
+            break
+        mid = (l + r) // 2
+    if nums[mid] != target:
+        return [-1, -1]
+    tl = mid
+    tr = mid
+    while tl >= 0 and nums[tl] == target:
+        tl -= 1
+    while tr <= length - 1 and nums[tr] == target:
+        tr += 1
+    return [tl + 1, tr - 1]
+
+
 nums = [0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 4]
-print(searchRange(nums, 3))
+print(searchRange2(nums, 2))
