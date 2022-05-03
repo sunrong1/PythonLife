@@ -52,23 +52,52 @@ def deleteDuplicates(head: ListNode) -> ListNode:
     return h.next
 
 
-head0 = ListNode(1)
-head1 = ListNode(2)
-head2 = ListNode(3)
-head3 = ListNode(3)
-head4 = ListNode(4)
-head5 = ListNode(4)
-head6 = ListNode(5)
-head0.next = head1
-head1.next = head2
-head2.next = head3
-head3.next = head4
-head4.next = head5
-head5.next = head6
+"""
+第二次编写
+还是得多练习；2more
+思路更清晰，就分两种场景，重复和不重复，二分法进行前进，代码更简洁，更清晰
+"""
+
+
+def deleteDuplicates2(head: ListNode) -> ListNode:
+    if not head:
+        return None
+    node = ListNode(-1)
+    node.next = head
+    l = node
+    r = node.next
+    while r:
+        b = False
+        while r.next and l.next.val == r.next.val:
+            b = True
+            r = r.next
+        if b:
+            l.next = r.next
+            r = r.next
+        else:
+            l.next = r
+            l = l.next
+            r = r.next
+    return node.next
+
+
+# head0 = ListNode(1)
+# head1 = ListNode(2)
+# head2 = ListNode(3)
+# head3 = ListNode(3)
+# head4 = ListNode(4)
+# head5 = ListNode(4)
+# head6 = ListNode(5)
+# head0.next = head1
+# head1.next = head2
+# head2.next = head3
+# head3.next = head4
+# head4.next = head5
+# head5.next = head6
 
 h0 = ListNode(1)
 h1 = ListNode(2)
 h2 = ListNode(2)
 h0.next = h1
 h1.next = h2
-print(deleteDuplicates(head0))
+print(deleteDuplicates2(h0))

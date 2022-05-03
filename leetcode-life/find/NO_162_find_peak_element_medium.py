@@ -19,7 +19,7 @@ from typing import List
 """
 
 
-def findPeakElement(self, nums: List[int]) -> int:
+def findPeakElement(nums: List[int]) -> int:
     if not nums:
         return -1
     l = 0
@@ -35,5 +35,35 @@ def findPeakElement(self, nums: List[int]) -> int:
     return l
 
 
+"""
+第二次编写
+只寻找一个峰值即可，在小范围向前移动即可
+代码写的更整齐，特例场景，返回其中一个就可以；题意更清晰；
+"""
+
+
+def findPeakElement2(nums: List[int]) -> int:
+    l = 0
+    r = len(nums) - 1
+    if not nums:
+        return -1
+    length = len(nums)
+    while l <= r:
+        mid = (l + r) // 2
+        # 序列上升，向大的方向移动
+        if mid + 1 <= length - 1 and nums[mid] <= nums[mid + 1]:
+            l = mid + 1
+        # 序列下降，向大的方向移动
+        elif mid + 1 <= length - 1 and nums[mid] > nums[mid + 1]:
+            if mid - 1 >= 0 and nums[mid] > nums[mid - 1]:
+                return mid
+            r = mid - 1
+        else:
+            return mid
+    return l
+
+
+nums = [1, 2, 1]
+nums = [1]
 nums = [1, 2]
-print(findPeakElement("", nums))
+print(findPeakElement2(nums))

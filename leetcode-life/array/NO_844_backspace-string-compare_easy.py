@@ -1,3 +1,9 @@
+"""
+方法1
+使用栈，快速便捷
+"""
+
+
 def backspaceCompare(s: str, t: str) -> bool:
     sStack = []
     tStack = []
@@ -18,7 +24,7 @@ def backspaceCompare(s: str, t: str) -> bool:
     return False
 
 
-def backspaceCompare2(s: str, t: str) -> bool:
+def backspaceCompare1(s: str, t: str) -> bool:
     sIndex = len(s) - 1
     tIndex = len(t) - 1
     # 从尾部向前后退，后退到第一个字母
@@ -55,6 +61,33 @@ def backspaceCompare2(s: str, t: str) -> bool:
         sIndex -= 1
         tIndex -= 1
     return True
+
+
+"""
+第二次编写：
+使用合理的数据结构，简单操作，快速实现
+变量使用更合理，快速
+"""
+
+
+def backspaceCompare2(s: str, t: str) -> bool:
+    t1 = []
+    t2 = []
+    for ss in s:
+        if ss != '#':
+            t1.append(ss)
+        else:
+            if t1:
+                t1.pop()
+    for tt in t:
+        if tt != '#':
+            t2.append(tt)
+        else:
+            if t2:
+                t2.pop()
+    if ''.join(t1) == ''.join(t2):
+        return True
+    return False
 
 
 s = "ab#c"
