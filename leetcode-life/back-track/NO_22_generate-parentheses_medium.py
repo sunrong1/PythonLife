@@ -34,4 +34,41 @@ def generateParenthesis(n: int) -> List[str]:
     return result
 
 
-print(generateParenthesis(11))
+# print(generateParenthesis(11))
+
+"""
+第二次编写
+题意理解：n=3 就是6个括号，三个左，三个右
+递归设计：
+
+递归停止条件：不符合条件的返回（右括号>左括号的数量），括号用完停止
+前进段：括号用完的，加到结果集中
+后退段：无
+
+"""
+
+
+def generateParenthesis2(n: int) -> List[str]:
+    ret = []
+    if n < 1:
+        return ret
+    p = ['('] * n + [')'] * n
+
+    # 第一个循环 ( ( ) )
+    # 第二个循环：( ) )
+    def dfs(s, tmp: List):
+        for i in range(s, n * 2):
+            t = tmp + [p[i]]
+            print(t)
+            if t.count(')') > t.count('('):
+                return
+            if i == 2 * n - 1:
+                ret.append(''.join(t))
+                return
+            dfs(i + 1, tmp + [p[i]])
+
+    dfs(0, [])
+    return ret
+
+
+print(generateParenthesis2(2))

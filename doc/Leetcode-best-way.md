@@ -7,6 +7,7 @@
     - 首先最重要的是理解题意和要求
     - 搜索算法
 ## 数据结构
+### 内置结构
 - 数组 
 
 - 链表 link
@@ -20,7 +21,9 @@
 
 - 堆 heap
 
-    
+- collections模块
+collections模块实现了特定目标的容器，以提供Python标准内建容器dict ,list , set , 和tuple的替代选择。
+可以实现queue 
 ## 基础算法
 
 - 排序
