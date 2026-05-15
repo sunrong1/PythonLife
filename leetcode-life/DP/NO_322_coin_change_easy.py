@@ -13,6 +13,10 @@ from typing import List
 """
 
 
+
+
+
+
 def coinChange(coins: List[int], amount: int) -> int:
     # dp[i] 表示金额i 的最小硬币数
     # 初始化dp[0] = 0
@@ -50,3 +54,30 @@ class Solution:
                     else:
                         dp[i] = dp[i-coin] +1
         return dp[amount]
+    
+    def coinChange3(self, coins: List[int], amount: int) -> int:
+        # define the state: 凑齐0元需要0个硬币
+        dp = [-1]* (amount+1)
+        dp[0]=0
+        for coin in coins:
+            dp[coin] = 1
+        
+        for i in range(1,amount+1):
+            for coin in coins:
+                # 防止越界访问
+                if i - coin < 0:
+                    continue
+                
+                # 可以组合成这个数量的钱
+                if dp[i-coin] != -1:
+                    if dp[i] !=-1:
+                        # state change formula
+                        dp[i] = min(dp[i-coin] +1,dp[i])
+                    else:
+                        dp[i] = dp[i-coin] + 1
+                    
+        return dp[amount]
+    
+s = Solution();
+ss = s.coinChange3([1,2,5],6)
+print("ss:", ss)

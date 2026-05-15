@@ -39,6 +39,26 @@ def subsets(nums: List[int]) -> List[List[int]]:
     dfs(0, [])
     return ret
 
+def subsets3(nums: List[int]) -> List[List[int]]:
+    """
+    回溯法：
+    列表操作
+    路径
+    结束条件
+    """
+    ret = []
+
+    def backtrack(start=0, path=[]):
+        ret.append(path)
+        for i in range(start, len(nums)):
+            # select
+            path.append(nums[i])
+            backtrack(i + 1, path)
+            path.pop()
+
+    backtrack(0,[])
+    return ret
+
 
 """
 方法2：
