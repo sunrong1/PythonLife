@@ -62,17 +62,34 @@ def subsets3(nums: List[int]) -> List[List[int]]:
 
 """
 方法2：
-广度优先搜索
-
+回溯算法-决策树
+date: 2026-5-19
 """
 
 
 def subsets0(nums: List[int]) -> List[List[int]]:
-    ret = [[]]
-    if not nums:
-        return ret
-    q = [nums[0]]
+    # 可选列表
+    n = len(nums)
+    # result :path
+    path =[]
+    ret  = []
+    def trackback(m):
+        # the end
+        ret.append(path[:])
+        
+        # count every layer to bianli
+        for i in range(m,n):
+            path.append(nums[i])
+            # udate the list
+            trackback(i+1)
+            path.pop()
+    # from 0 to trackback
+    trackback(0)
+    return ret
+        
+        
+    
 
 
 nums = [1, 2, 3]
-print(subsets(nums))
+print(subsets0(nums))

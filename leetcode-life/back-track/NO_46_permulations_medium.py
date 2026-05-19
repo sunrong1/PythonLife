@@ -25,18 +25,25 @@ def permute(nums: List[int]) -> List[List[int]]:
     return result
 
 
-def permute1(nums: List[int]) -> List[List[int]]:
-    res = []
-
-    def backtrack(nums, tmp):
-        if not nums:
-            res.append(tmp)
-            return
-        for i in range(len(nums)):
-            backtrack(nums[:i] + nums[i + 1:], tmp + [nums[i]])
-
-    backtrack(nums, [])
-    return res
-
-
-print(permute([1, 2]))
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        ret =[]
+        # route 
+        path = []
+        n = len(nums)
+        def trackback(m):
+            # 全部选择完，保存结果
+            if m == n:
+                ret.append(path[:])
+                return
+            for i in range(m,n):
+                # 选择当前路径
+                path.append(nums[i])
+                trackback(i)
+                # 不选择当前路径，两种方式
+                path.pop()
+         
+        trackback(0)
+        return ret
+s = Solution()
+print(s.permute([1, 2]))
