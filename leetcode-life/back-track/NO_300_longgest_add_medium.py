@@ -2,7 +2,7 @@ from typing import List
 
 """
 回溯法
-最长递增子序列
+最长递增子序列,严格递增
 """
 
 
