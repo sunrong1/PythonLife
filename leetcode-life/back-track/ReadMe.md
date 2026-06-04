@@ -22,6 +22,7 @@ backtrack()
 ## 组合问题 
 典型题目：77，
 
+组合没有顺序，排列有顺序
 ## 排列问题
 Leetcide 78，90
 
@@ -29,7 +30,7 @@ Leetcide 78，90
 Leetcode 131，字符串切割
 
 ## 排列问题
-Leetcode 300,491
+Leetcode 491
 
 ## 排列问题
 典型题目

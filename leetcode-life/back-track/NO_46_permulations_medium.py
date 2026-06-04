@@ -24,26 +24,52 @@ def permute(nums: List[int]) -> List[List[int]]:
     track(nums, [])
     return result
 
-
+"""_summary_
+回溯法全排列
+@since 2021
+@update 2026-6
+Returns:
+    _type_: _description_
+"""
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        path =[]
         ret =[]
-        # route 
-        path = []
         n = len(nums)
-        def trackback(m):
-            # 全部选择完，保存结果
-            if m == n:
+        
+        def backtrack(used):
+            if len(path) == n:
                 ret.append(path[:])
                 return
-            for i in range(m,n):
-                # 选择当前路径
+            for i in range(n):
+                if used[i]:
+                    continue
+                used[i] = 1
                 path.append(nums[i])
-                trackback(i)
-                # 不选择当前路径，两种方式
+                backtrack(used)
+                used[i] = 0
                 path.pop()
-         
-        trackback(0)
+        backtrack([0] * n)
         return ret
+    
+    def permute0(self, nums: List[int]) -> List[List[int]]:
+        path =[]
+        ret =[]
+        n = len(nums)
+        
+        def backtrack():
+            if len(path) == n:
+                ret.append(path[:])
+                return
+            for i in range(n):
+                if nums[i] in path:
+                    continue
+                path.append(nums[i])
+                backtrack()
+                path.pop()
+        backtrack()
+        return ret
+    
+    
 s = Solution()
-print(s.permute([1, 2]))
+print(s.permute([1, 2, 3]))

@@ -40,5 +40,33 @@ def permuteUnique(nums: List[int]) -> List[List[int]]:
     return res
 
 
-nums = [1, 1, 2]
-print(permuteUnique(nums))
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        path =[]
+        ret =[]
+        n = len(nums)
+
+        def backtrack(used):
+            sets = set()
+            if len(path) == n:
+                ret.append(path[:])
+                return
+            for i in range(n):
+                # 控制同一行不能重复
+                if nums[i] in sets:
+                    continue
+                if used[i]:
+                    continue
+                # sets 增加的地方非常关键
+                sets.add(nums[i])
+                
+                used[i] =1
+                path.append(nums[i])
+                backtrack(used)
+                path.pop()
+                used[i] = 0
+        backtrack([0]*n)
+        return ret
+       
+s = Solution()
+print(s.permuteUnique([1, 1, 2])) 
