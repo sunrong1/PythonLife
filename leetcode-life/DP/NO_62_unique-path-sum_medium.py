@@ -1,11 +1,8 @@
 
+
 """
 路径和，
 @date： 2026-6-11
-dp[i][j] 第i行j列的最小和
-dp[i][j] = min(dp[i-1][j] ,dp[i][j-1]) + grid[i][j]
-d[0][j] = d[0][j-1] +  grid[0][j]
-d[i][0] = d[i][0] +  grid[i][0]
 """
 
 
