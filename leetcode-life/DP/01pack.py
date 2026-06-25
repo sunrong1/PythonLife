@@ -13,10 +13,34 @@ pack = 4kg 总价值如何装最大？
 
 推导公式（状态转移方程），即放入i物品和不放入的最大值
 dp[i][j] = max(dp[i-1][j] , dp[i-1][j-w(i)] + v(i))
+
+@since 2022
+@update 2026-6-25
 """
 
 from typing import List
 
+
+# 完全背包
+def pack2(nums,weight):
+    # 2维度表
+    # dp[i][j] the object num is i ,put the weight is j , and the result of  most value
+    # dp[i][j] = max(dp[i-1][j],dp[i-1][j-weight[i] + nums[i]])
+    # init ,row  = len(nums) ,col = weight
+    n = len(nums)
+    dp = [[0 for _ in range(weight+1)] for _ in range(n)]
+    for i in range(n):
+        for j in range(1,weight +1):
+            # 不放
+            # 可以放进去和放不进去
+            # dp[i-1][j-nums[i][0]] + nums[i][1]
+            if j - nums[i][0] >= 0:
+                # 每次都和上一层有关系
+                dp[i][j] = max(dp[i-1][j],dp[i-1][j-nums[i][0]] + nums[i][1])
+            else:
+                dp[i][j] = dp[i-1][j]
+    print(dp)
+    return dp[n-1][weight]
 
 def pack(nums, weight):
     dp = [[0] * (weight + 1) for i in range(len(nums))]
@@ -37,4 +61,4 @@ def pack(nums, weight):
 
 
 nums = [(1, 15), (3, 20), (4, 30)]
-print(pack(nums, 4))
+print(pack2(nums, 4))
